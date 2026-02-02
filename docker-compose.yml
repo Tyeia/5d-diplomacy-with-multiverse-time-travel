@@ -20,5 +20,8 @@ services:
       - 5d-diplomacy
     hostname: 5d-diplomacy-backend
 networks:
-  - docker-bridge
-  - 5d-diplomacy
+  docker-bridge:
+    external: true
+    name: docker-bridge
+  5d-diplomacy:
+    driver: bridge

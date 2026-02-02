@@ -4,11 +4,21 @@ services:
     ports:
       - 5173:8080
     restart: always
+    networks:
+      - docker-bridge
+      - 5d-diplomacy
+    hostname: 5d-diplomacy-frontend
   backend:
     build: server/
     environment:
       - "Provider=Sqlite"
       - "ConnectionStrings__Sqlite=Data Source=./mount/5dDiplomacy.db"
     volumes:
-      - ./server/mount:/app/mount
+      - ./server/mount:/mnt/data/diplomacy
     restart: always
+    networks:
+      - 5d-diplomacy
+    hostname: 5d-diplomacy-backend
+networks:
+  - docker-bridge
+  - 5d-diplomacy
